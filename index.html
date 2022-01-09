@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+        <style>
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
+        }
+        </style>
+    </head>
+
+    <body style="margin : 0px; overflow: hidden;">
+        <!--圖像加載前顯示加載中...-->
+        <div class="arjs-loader">
+            <div>Loading, please wait...</div>
+        </div>
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            embedded
+            arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+        >
+            <!--我們使用了 cors 代理來避免跨域問題-->            
+            <!-- a-nft是定義圖像跟蹤實體的錨點 -->
+            <!-- 在 url 使用到圖像描述符的路徑之前創建 -->
+            <!-- 路徑應該以名稱結束，無需擴展名。舉例來說，如果文件是「pinball.fset」那麼路徑的結尾單次就是「pinball」 -->
+           <a-nft
+            type="nft"
+            url="https://arjs-cors-proxy.herokuapp.com/https://yenzi1221.github.io/ccc1221/nft/QQQ"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+            >
+
+             <!-- 作為 a-nft 的子元素，您可以定義要顯示的內容。下面是一個 GLTF 模型實體 -->       
+            <a-entity
+                gltf-model="https://arjs-cors-proxy.herokuapp.com/https://yenzi1221.github.io/ccc1221/gltf/scene.gltf"
+                scale="5 5 5"
+                position="50 150 0"
+            >
+            </a-entity>
+            </a-nft>
+
+             <!-- 靜態攝像機，根據設備的運動參數進行移動 -->
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
